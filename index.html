@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бизнес-ланчи в Москве</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключаем шрифт Google -->
+    <!-- подключение гугл шрифта -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,11 +16,13 @@
             <a href="#">Главная</a>
             <a href="#">Меню</a>
             <a href="#contacts">Контакты</a>
+            <a href="#feedback">Обратная связь</a>
+            <a href="#auth">Войти</a>
         </nav>
     </header>
 
     <main>
-        <!-- О компании -->
+        <!-- о компании -->
         <section>
             <h2>О нашей компании</h2>
             <img src="images/lunch.jpg" alt="Бизнес-ланч">
@@ -28,7 +30,7 @@
                Мы используем только свежие продукты и заботимся о вашем здоровье и времени.</p>
         </section>
 
-        <!-- Преимущества -->
+        <!-- преимущества -->
         <section>
             <h2>Почему выбирают нас?</h2>
             <ul>
@@ -38,7 +40,7 @@
             </ul>
         </section>
 
-        <!-- Популярные блюда -->
+        <!-- популярные блюда -->
         <section>
             <h2>Популярные блюда</h2>
             <table>
@@ -74,8 +76,69 @@
                 </tr>
             </table>
         </section>
+
+        <!-- форма обратной связи -->
+        <section id="feedback">
+            <h2>Форма обратной связи</h2>
+            <form action="https://httpbin.org/post" method="POST" enctype="multipart/form-data">
+                <label>ФИО:<br>
+                    <input type="text" name="fio" required>
+                </label><br><br>
+
+                <label>Email:<br>
+                    <input type="email" name="email" required>
+                </label><br><br>
+
+                <p>Откуда узнали о нас?</p>
+                <label><input type="radio" name="source" value="Интернет" required> Интернет</label><br>
+                <label><input type="radio" name="source" value="Реклама"> Реклама</label><br>
+                <label><input type="radio" name="source" value="Друзья"> Друзья</label><br><br>
+
+                <label>Тип обращения:<br>
+                    <select name="type">
+                        <option value="жалоба">Жалоба</option>
+                        <option value="предложение">Предложение</option>
+                    </select>
+                </label><br><br>
+
+                <label>Текст сообщения:<br>
+                    <textarea name="message" rows="5" required></textarea>
+                </label><br><br>
+
+                <label>Вложения:<br>
+                    <input type="file" name="file">
+                </label><br><br>
+
+                <label>
+                    <input type="checkbox" name="consent" required> Даю согласие на обработку персональных данных
+                </label><br><br>
+
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
     </main>
 
+    <!-- форма аутентификации -->
+    <section id="auth" class="auth-section">
+        <form action="https://httpbin.org/post" method="POST" class="auth-form">
+            <h2>Вход</h2>
+            <label>Логин:<br>
+                <input type="text" name="login" required>
+            </label><br><br>
+
+            <label>Пароль:<br>
+                <input type="password" name="password" required>
+            </label><br><br>
+
+            <label>
+                <input type="checkbox" name="remember"> Запомнить меня
+            </label><br><br>
+
+            <button type="submit">Войти</button>
+        </form>
+    </section>
+
+    <!-- футер -->
     <footer id="contacts">
         <p>📍 Москва, ул. Шарико-подшипниковая, д. 10</p>
         <p>📞 Телефон: <a href="tel:+79197615291">+7 (919) 761-52-91</a></p>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — FreshLunch</title>
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="auth-container">
+        <form action="https://httpbin.org/post" method="POST" class="auth-form">
+            <h2>Вход</h2>
+
+            <label>Логин:<br>
+                <input type="text" name="login" required>
+            </label><br><br>
+
+            <label>Пароль:<br>
+                <input type="password" name="password" required>
+            </label><br><br>
+
+            <label>
+                <input type="checkbox" name="remember"> Запомнить меня
+            </label><br><br>
+
+            <button type="submit">Войти</button><br><br>
+
+            <a href="index.html" class="back-link">⬅ Вернуться на сайт</a>
+        </form>
+    </div>
+
+</body>
+</html>

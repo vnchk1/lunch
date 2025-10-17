@@ -1,4 +1,4 @@
-/* Универсальные настройки */
+/* ===== Универсальные настройки ===== */
 * {
     margin: 0;
     padding: 0;
@@ -12,9 +12,9 @@ body {
     background-color: #fafafa;
 }
 
-/* Шапка */
+/* ===== Шапка ===== */
 header {
-    background-color: #ff6347;
+    background-color: #ff6347; /* яркий фирменный цвет */
     color: white;
     padding: 20px;
     display: flex;
@@ -24,6 +24,7 @@ header {
 
 header h1 {
     font-size: 28px;
+    font-weight: 700;
 }
 
 nav a {
@@ -35,10 +36,10 @@ nav a {
 }
 
 nav a:hover {
-    color: #ffe082;
+    color: #ffe082; /* мягкий оттенок при наведении */
 }
 
-/* Основной контент */
+/* ===== Основной контент ===== */
 main {
     padding: 30px;
 }
@@ -50,6 +51,7 @@ section {
 section h2 {
     font-size: 24px;
     margin-bottom: 15px;
+    color: #222;
 }
 
 section img {
@@ -58,16 +60,17 @@ section img {
     height: auto;
     display: block;
     margin-bottom: 15px;
+    border-radius: 8px;
 }
 
-/* Преимущества */
+/* ===== Преимущества ===== */
 ul {
     list-style-type: disc;
     margin-left: 20px;
     font-size: 18px;
 }
 
-/* Таблица */
+/* ===== Таблица популярных блюд ===== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -85,63 +88,54 @@ th {
     font-weight: bold;
 }
 
-/* Форма обратной связи */
-form {
+/* ===== Форма обратной связи ===== */
+#feedback form {
     background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     max-width: 500px;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form select,
-form textarea,
-form input[type="file"] {
+#feedback input[type="text"],
+#feedback input[type="email"],
+#feedback select,
+#feedback textarea,
+#feedback input[type="file"] {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border-radius: 5px;
+    border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 16px;
 }
 
-form button {
+#feedback textarea {
+    resize: vertical;
+}
+
+#feedback input[type="radio"],
+#feedback input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#feedback button {
+    margin-top: 10px;
     background-color: #ff6347;
     color: white;
     border: none;
     padding: 12px 20px;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-form button:hover {
+#feedback button:hover {
     background-color: #e5533c;
 }
 
-/* Форма аутентификации */
-.auth-section {
-    background: url("images/bg.jpg") no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.auth-form {
-    background: rgba(255,255,255,0.9);
-    padding: 30px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-}
-
-.auth-form h2 {
-    margin-bottom: 20px;
-}
-
-/* Футер */
+/* ===== Футер ===== */
 footer {
     background-color: black;
     color: white;

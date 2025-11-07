@@ -1,0 +1,74 @@
+/* Сетка меню */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+/* Карточка блюда */
+.dish {
+  background: #fff;
+  border-radius: 35px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dish:hover {
+  border: 2px solid tomato;
+}
+
+.dish:hover button {
+  background: tomato;
+  color: white;
+}
+
+.dish img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 35px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.weight {
+  color: gray;
+}
+
+button {
+  background: #f1eee9;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 800px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}

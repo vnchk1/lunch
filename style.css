@@ -1,143 +1,190 @@
-/* ===== Универсальные настройки ===== */
+/* ===== Сброс ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ===== Базовые настройки ===== */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
     line-height: 1.6;
     color: #333;
     background-color: #fafafa;
 }
 
-/* ===== Шапка ===== */
+/* ===== Шапка и меню ===== */
 header {
-    background-color: #ff6347; /* яркий фирменный цвет */
+    background: #ff6347;
     color: white;
-    padding: 20px;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 header h1 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
 }
 
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav li {
+    margin-left: 20px;
+}
+
 nav a {
-    margin-left: 15px;
-    text-decoration: none;
     color: white;
-    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
     transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #ffe082; /* мягкий оттенок при наведении */
+    color: #ffe082;
 }
 
 /* ===== Основной контент ===== */
 main {
-    padding: 30px;
+    padding: 30px 50px;
 }
 
-section {
-    margin-bottom: 40px;
-}
-
-section h2 {
-    font-size: 24px;
+h2 {
     margin-bottom: 15px;
     color: #222;
 }
 
-section img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin-bottom: 15px;
+img {
+    max-width: 100%;
     border-radius: 8px;
+    margin-bottom: 15px;
 }
 
-/* ===== Преимущества ===== */
-ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    font-size: 18px;
-}
-
-/* ===== Таблица популярных блюд ===== */
+/* ===== Таблицы ===== */
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
     margin-top: 15px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
 }
 
 th {
-    background-color: #ffebcd;
-    font-weight: bold;
+    background: #ffebcd;
 }
 
-/* ===== Форма обратной связи ===== */
-#feedback form {
-    background: #fff;
-    padding: 25px;
+/* ===== Формы ===== */
+form {
+    background: white;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     max-width: 500px;
 }
 
-#feedback input[type="text"],
-#feedback input[type="email"],
-#feedback select,
-#feedback textarea,
-#feedback input[type="file"] {
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, select, textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 6px;
+    padding: 8px;
     border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 4px;
     font-size: 16px;
 }
 
-#feedback textarea {
+textarea {
     resize: vertical;
 }
 
-#feedback input[type="radio"],
-#feedback input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-#feedback button {
-    margin-top: 10px;
-    background-color: #ff6347;
+button {
+    background: #ff6347;
     color: white;
     border: none;
-    padding: 12px 20px;
     border-radius: 6px;
-    cursor: pointer;
+    padding: 10px 20px;
     font-size: 16px;
-    transition: background-color 0.3s;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
-#feedback button:hover {
-    background-color: #e5533c;
+button:hover {
+    background: #e5533c;
+}
+
+/* ===== Карточки блюд (страница заказа) ===== */
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    width: 220px;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.add-btn {
+    display: block;
+    background: #ff6347;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+    background: #e5533c;
+}
+
+/* ===== Страница входа ===== */
+.auth-section {
+    background: url("images/lunch.jpg") no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.auth-section form {
+    background: rgba(0,0,0,0.6);
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
 }
 
 /* ===== Футер ===== */
 footer {
-    background-color: black;
+    background: black;
     color: white;
     text-align: center;
     padding: 20px;
@@ -150,4 +197,52 @@ footer a {
 
 footer a:hover {
     color: #ffe082;
+}
+
+/* === Исправленные стили для радиокнопок === */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.radio-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #222;
+}
+
+.radio-group input[type="radio"] {
+  margin: 0;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #999;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.radio-group input[type="radio"]::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 3px;
+  left: 3px;
+  background-color: tomato;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.radio-group input[type="radio"]:checked::before {
+  transform: scale(1);
 }

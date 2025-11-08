@@ -1,19 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const categories = ["soup", "main", "drink"];
   const mainContainer = document.querySelector("main");
-
-  // Контейнер для заказа
-  const orderBox = document.createElement("div");
-  orderBox.id = "order-box";
-  orderBox.style.marginTop = "30px";
-  orderBox.style.padding = "20px";
-  orderBox.style.background = "white";
-  orderBox.style.borderRadius = "10px";
-  orderBox.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
-  orderBox.innerHTML = "<p>Ничего не выбрано</p>";
+  const orderBox = document.querySelector("#order-box");
+  const soupInput = document.querySelector("#soupInput");
+  const mainInput = document.querySelector("#mainInput");
+  const drinkInput = document.querySelector("#drinkInput");
 
   const selected = { soup: null, main: null, drink: null };
 
+  // Сортировка блюд по категориям
   const sortedDishes = {};
   categories.forEach(cat => {
     sortedDishes[cat] = dishes
@@ -21,12 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
       .sort((a, b) => a.name.localeCompare(b.name));
   });
 
-  // Рендерим каждую категорию
+  // Рендер каждой категории
   categories.forEach(cat => {
     const section = document.createElement("section");
     const title =
-      cat === "soup" ? "Супы" :
-      cat === "main" ? "Главные блюда" : "Напитки";
+      cat === "soup" ? "Выберите суп" :
+      cat === "main" ? "Выберите главное блюдо" :
+      "Выберите напиток";
     section.innerHTML = `<h2>${title}</h2>`;
 
     const grid = document.createElement("div");
@@ -45,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button type="button">Добавить</button>
       `;
 
+      // Обработка выбора
       card.querySelector("button").addEventListener("click", () => {
         selected[cat] = dish;
         updateOrder();
@@ -54,12 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
       grid.appendChild(card);
     });
 
+    // Добавляем секцию перед формой
+    const form = document.querySelector("#order-form");
+    mainContainer.insertBefore(section, form);
     section.appendChild(grid);
-    mainContainer.appendChild(section);
   });
-
-  // Добавляем контейнер заказа после всех секций
-  mainContainer.appendChild(orderBox);
 
   function updateOrder() {
     let total = 0;
@@ -78,11 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if (total > 0) {
-      html += `<p><strong>Итого: ${total} ₽</strong></p>`;
-    }
+    if (total > 0) html += `<p><strong>Итого: ${total} ₽</strong></p>`;
+    else html = "<p>Ничего не выбрано</p>";
 
     orderBox.innerHTML = html;
+
+    // Передача значений в скрытые поля формы
+    soupInput.value = selected.soup ? selected.soup.keyword : "";
+    mainInput.value = selected.main ? selected.main.keyword : "";
+    drinkInput.value = selected.drink ? selected.drink.keyword : "";
   }
 
   function highlightSelected(cat, keyword) {
@@ -90,11 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = sections[categories.indexOf(cat)];
     const cards = section.querySelectorAll(".dish");
     cards.forEach(c => {
-      if (c.dataset.dish === keyword) {
-        c.style.border = "2px solid tomato";
-      } else {
-        c.style.border = "none";
-      }
+      c.style.border = c.dataset.dish === keyword ? "2px solid tomato" : "none";
     });
   }
 });

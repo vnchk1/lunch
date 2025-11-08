@@ -1,4 +1,4 @@
-/* Сетка меню */
+/* === Сетка меню === */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6,7 +6,7 @@
   margin-bottom: 40px;
 }
 
-/* Карточка блюда */
+/* === Карточка блюда === */
 .dish {
   background: #fff;
   border-radius: 35px;
@@ -60,7 +60,7 @@ button {
   transition: background 0.3s ease;
 }
 
-/* Адаптивность */
+/* === Адаптивная сетка === */
 @media (max-width: 800px) {
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -71,4 +71,153 @@ button {
   .menu-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* === Стили формы === */
+.order-form {
+  margin-top: 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.form-block {
+  flex: 1;
+  min-width: 300px;
+}
+
+.form-block h3 {
+  margin-bottom: 15px;
+}
+
+.form-block label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.form-block input,
+.form-block textarea,
+.form-block select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* === Радиокнопки и блок времени === */
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-top: 15px;
+}
+
+fieldset legend {
+  padding: 0 5px;
+  font-weight: 600;
+}
+
+/* Радиокнопки строго напротив текста */
+fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+fieldset input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: tomato;
+}
+
+/* Поле выбора времени */
+label[for="time"] {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+input[type="time"] {
+  width: auto;
+  display: block;
+  margin-top: 5px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+/* === Кнопки отправки === */
+.form-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-actions button {
+  background: tomato;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.form-actions button:hover {
+  background: #e3421c;
+}
+
+/* === Адаптивность формы === */
+@media (max-width: 800px) {
+  .form-columns {
+    flex-direction: column;
+  }
+
+  input[type="time"] {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* === Чекбокс "Получать скидки и акции" === */
+.form-block input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: tomato;
+  cursor: pointer;
+}
+
+/* Выровнять чекбокс и надпись в одну линию */
+label[for="discounts"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  font-weight: 500;
+  cursor: pointer;
 }

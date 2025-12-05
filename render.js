@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const selected = { soup: null, main: null, drink: null, salad: null, dessert: null };
 
-  // Конфигурация фильтров для каждой категории (id тегов должны совпадать с tags в dishes.js)
+  // Конфигурация фильтров для каждой категории (id фильтров должны совпадать со значениями kind)
   const filtersConfig = {
     soup: [
       { id: "all", label: "Все" },
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.classList.add("filter-btn");
-      btn.dataset.filter = f.id;
+      btn.dataset.filter = f.id;   // data-filter у кнопки
       btn.textContent = f.label;
       if (f.id === "all") btn.classList.add("active");
       btn.addEventListener("click", () => {
@@ -121,28 +121,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.createElement("div");
     card.classList.add("dish");
     card.dataset.dish = dish.keyword;
-    // store tags for quick access
-    card.dataset.tags = (dish.tags || []).join(" ");
+    // store kind as data-kind
+    card.dataset.kind = dish.kind || "";
 
-    card.innerHTML = `
-      <img src="${dish.image}" alt="${dish.name}">
-      <p class="price">${dish.price} ₽</p>
-      <p class="name">${dish.name}</p>
-      <p class="weight">${dish.count}</p>
-      <button type="button">Добавить</button>
-    `;
+    // Создаём img вручную чтобы повесить обработчик onerror
+    const img = document.createElement("img");
+    img.alt = dish.name;
 
-    // Обработка выбора
-    card.querySelector("button").addEventListener("click", () => {
+    // placeholder (SVG data-uri)
+    const placeholder =
+      "data:image/svg+xml;charset=utf-8," +
+      encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'>
+           <rect width='100%' height='100%' fill='#efefef'/>
+           <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#777' font-family='Arial' font-size='20'>Изображение недоступно</text>
+         </svg>`
+      );
+
+    img.src = dish.image;
+    img.onerror = () => {
+      console.warn('Ошибка загрузки изображения:', dish.image, 'для блюда', dish.keyword);
+      img.src = placeholder;
+    };
+
+    const priceP = document.createElement("p");
+    priceP.className = "price";
+    priceP.textContent = `${dish.price} ₽`;
+
+    const nameP = document.createElement("p");
+    nameP.className = "name";
+    nameP.textContent = dish.name;
+
+    const weightP = document.createElement("p");
+    weightP.className = "weight";
+    weightP.textContent = dish.count;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Добавить";
+    btn.addEventListener("click", () => {
       selected[cat] = dish;
       updateOrder();
       highlightSelected(cat, dish.keyword);
     });
 
+    // собираем карточку
+    card.appendChild(img);
+    card.appendChild(priceP);
+    card.appendChild(nameP);
+    card.appendChild(weightP);
+    card.appendChild(btn);
+
     return card;
   }
 
-  // Применить фильтр к секции — показывает/скрывает карточки
+  // Применить фильтр к секции — показывает/скрывает карточки (по data-kind)
   function applyFilterToSection(section, cat) {
     const filterId = activeFilter[cat];
     const grid = section.querySelector(".menu-grid");
@@ -150,8 +183,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = grid.querySelectorAll(".dish");
     let anyVisible = false;
     cards.forEach(card => {
-      const tags = card.dataset.tags ? card.dataset.tags.split(" ") : [];
-      const show = filterId === "all" || tags.includes(filterId);
+      const kind = card.dataset.kind || "";
+      const show = filterId === "all" || kind === filterId;
       card.style.display = show ? "" : "none";
       if (show) anyVisible = true;
     });

@@ -25,7 +25,6 @@
 
 <main>
   <h2>Соберите свой идеальный ланч</h2>
-  <!-- Здесь будет JS-рендер меню -->
 
   <!-- Форма заказа -->
   <form action="https://httpbin.org/post" method="POST" id="order-form" class="order-form">
@@ -38,6 +37,8 @@
         <input type="hidden" id="soupInput" name="soup">
         <input type="hidden" id="mainInput" name="main">
         <input type="hidden" id="drinkInput" name="drink">
+        <input type="hidden" id="saladInput" name="salad">
+        <input type="hidden" id="dessertInput" name="dessert">
 
         <label for="comment">Комментарий к заказу</label>
         <textarea id="comment" name="comment"></textarea>

@@ -6,6 +6,38 @@
   margin-bottom: 40px;
 }
 
+/* === Фильтры под заголовком категории === */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 18px;
+  flex-wrap: wrap;
+}
+
+/* Исправленные стили: явный контраст текста и рамки */
+.filter-btn {
+  background: #f6f6f6;
+  border: 1px solid #dcdcdc;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  color: #222;              /* тёмный контрастный текст */
+  box-shadow: none;
+}
+
+.filter-btn:hover {
+  background: #efefef;
+  border-color: #cfcfcf;
+}
+
+.filter-btn.active {
+  background: tomato;
+  color: #ffffff;           /* белый текст на активной кнопке */
+  border-color: tomato;
+}
+
 /* === Карточка блюда === */
 .dish {
   background: #fff;
@@ -60,8 +92,14 @@ button {
   transition: background 0.3s ease;
 }
 
+/* сообщение "по фильтру нет позиций" */
+.empty-note {
+  color: #777;
+  margin-top: 10px;
+}
+
 /* === Адаптивная сетка === */
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
   }

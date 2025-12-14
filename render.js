@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Рендер каждой категории с фильтрами и гридом
   categories.forEach(cat => {
     const section = document.createElement("section");
+    section.dataset.category = cat; // Добавляем data-атрибут для идентификации категории
     const title =
       cat === "soup" ? "Выберите суп" :
       cat === "main" ? "Выберите главное блюдо" :
@@ -109,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = createDishCard(dish, cat);
         grid.appendChild(card);
       });
+      // Сразу применяем фильтр "all" для отображения всех карточек
+      applyFilterToSection(section, cat);
     }
 
     // Добавляем секцию перед формой
@@ -123,6 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
     card.dataset.dish = dish.keyword;
     // store kind as data-kind
     card.dataset.kind = dish.kind || "";
+    // Убеждаемся, что карточка видима по умолчанию
+    card.style.display = "";
 
     // Создаём img вручную чтобы повесить обработчик onerror
     const img = document.createElement("img");
@@ -160,6 +165,12 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.type = "button";
     btn.textContent = "Добавить";
     btn.addEventListener("click", () => {
+      // Проверяем, не заблокирована ли секция
+      const section = card.closest("section[data-category]");
+      if (section && section.classList.contains("locked-section")) {
+        return; // Не позволяем выбирать блюда из заблокированных секций
+      }
+      
       selected[cat] = dish;
       updateOrder();
       highlightSelected(cat, dish.keyword);
@@ -234,6 +245,11 @@ document.addEventListener("DOMContentLoaded", () => {
     drinkInput.value = selected.drink ? selected.drink.keyword : "";
     saladInput.value = selected.salad ? selected.salad.keyword : "";
     dessertInput.value = selected.dessert ? selected.dessert.keyword : "";
+    
+    // Обновляем состояния секций после изменения заказа
+    if (typeof updateSectionStates === 'function') {
+      setTimeout(() => updateSectionStates(), 0);
+    }
   }
 
   function highlightSelected(cat, keyword) {
@@ -247,10 +263,339 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Инициализация — применяем фильтры (all) ко всем секциям, чтобы поставить сообщения корректно
-  const allSections = mainContainer.querySelectorAll("section");
-  allSections.forEach((section, idx) => {
-    const cat = categories[idx];
-    applyFilterToSection(section, cat);
+  // Примечание: applyFilterToSection уже вызывается при создании каждой секции выше,
+  // но вызываем еще раз для гарантии, что все карточки отображаются правильно
+  const allSections = mainContainer.querySelectorAll("section[data-category]");
+  allSections.forEach((section) => {
+    const cat = section.dataset.category;
+    if (cat) {
+      applyFilterToSection(section, cat);
+    }
   });
 
+  // Логика работы с комбо
+  const combos = document.querySelectorAll(".combo");
+  const comboStatus = document.querySelector(".combo-status");
+  const cancelComboBtn = document.querySelector(".cancel-combo-btn");
+  let activeCombo = null;
+  let dessertAdded = false;
+  let allowedCategories = [];
+
+  // Маппинг названий категорий
+  const categoryMap = {
+    "Суп": "soup",
+    "Главное блюдо": "main",
+    "Салат": "salad",
+    "Напиток": "drink",
+    "Десерт": "dessert"
+  };
+
+  // Обработка кликов на комбо
+  combos.forEach(combo => {
+    combo.addEventListener("click", () => {
+      const comboData = JSON.parse(combo.dataset.combo || "{}");
+      
+      // Если это десерт
+      if (comboData.dessert) {
+        dessertAdded = !dessertAdded;
+        combo.classList.toggle("active-combo", dessertAdded);
+        updateComboStatus();
+        updateSectionStates();
+        return;
+      }
+
+      // Если кликнули на то же комбо - отменяем выбор
+      if (activeCombo === combo) {
+        activeCombo = null;
+        combo.classList.remove("active-combo");
+        cancelComboBtn.style.display = "none";
+        allowedCategories = dessertAdded ? ["dessert"] : [];
+      } else {
+        // Убираем подсветку с других комбо (кроме десерта)
+        combos.forEach(c => {
+          if (!c.classList.contains("dessert-combo")) {
+            c.classList.remove("active-combo");
+          }
+        });
+        
+        activeCombo = combo;
+        combo.classList.add("active-combo");
+        cancelComboBtn.style.display = "inline-block";
+        
+        // Определяем разрешенные категории
+        allowedCategories = [];
+        if (comboData.soup) allowedCategories.push("soup");
+        if (comboData.main) allowedCategories.push("main");
+        if (comboData.salad) allowedCategories.push("salad");
+        if (comboData.drink) allowedCategories.push("drink");
+        if (dessertAdded) allowedCategories.push("dessert");
+      }
+
+      updateComboStatus();
+      updateSectionStates();
+    });
+  });
+
+  // Кнопка отмены комбо
+  cancelComboBtn.addEventListener("click", () => {
+    if (activeCombo) {
+      activeCombo.classList.remove("active-combo");
+      activeCombo = null;
+    }
+    cancelComboBtn.style.display = "none";
+    allowedCategories = dessertAdded ? ["dessert"] : [];
+    updateComboStatus();
+    updateSectionStates();
+  });
+
+  // Обработчик сброса формы
+  const resetBtn = orderForm?.querySelector('button[type="reset"]');
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      // Сбрасываем состояние комбо
+      if (activeCombo) {
+        activeCombo.classList.remove("active-combo");
+        activeCombo = null;
+      }
+      dessertAdded = false;
+      const dessertCombo = document.querySelector(".dessert-combo");
+      if (dessertCombo) {
+        dessertCombo.classList.remove("active-combo");
+      }
+      cancelComboBtn.style.display = "none";
+      allowedCategories = [];
+      
+      // Сбрасываем выбранные блюда
+      categories.forEach(cat => {
+        selected[cat] = null;
+      });
+      
+      // Обновляем интерфейс
+      setTimeout(() => {
+        updateComboStatus();
+        updateSectionStates();
+        updateOrder();
+        // Сбрасываем подсветку карточек
+        const allCards = mainContainer.querySelectorAll(".dish");
+        allCards.forEach(c => {
+          c.style.border = "none";
+        });
+      }, 0);
+    });
+  }
+
+  // Инициализация состояний секций при загрузке
+  setTimeout(() => {
+    if (typeof updateSectionStates === 'function') {
+      updateSectionStates();
+    }
+  }, 100);
+
+  // Обновление статуса комбо
+  function updateComboStatus() {
+    if (!activeCombo && !dessertAdded) {
+      comboStatus.innerHTML = "<p>Комбо не выбрано</p>";
+      return;
+    }
+
+    const baseCats = activeCombo 
+      ? Object.keys(JSON.parse(activeCombo.dataset.combo || "{}"))
+          .filter(cat => cat !== "dessert" && JSON.parse(activeCombo.dataset.combo)[cat])
+      : [];
+    
+    const totalCats = dessertAdded ? [...baseCats, "dessert"] : baseCats;
+    
+    const categoryNames = {
+      soup: "Суп",
+      main: "Главное блюдо",
+      salad: "Салат",
+      drink: "Напиток",
+      dessert: "Десерт"
+    };
+    
+    const names = totalCats.map(cat => categoryNames[cat] || cat);
+    comboStatus.innerHTML = `<p>Собираем комбо: ${names.join(" + ")}</p>`;
+  }
+
+  // Обновление состояний секций (подсветка и блокировка)
+  function updateSectionStates() {
+    const sections = mainContainer.querySelectorAll("section[data-category]");
+    
+    sections.forEach(section => {
+      const sectionCategory = section.dataset.category;
+      const isDessert = sectionCategory === "dessert";
+      
+      // Убираем все классы подсветки
+      section.classList.remove("highlight-section", "locked-section");
+      
+      if (activeCombo) {
+        // Если есть активное комбо
+        if (allowedCategories.includes(sectionCategory)) {
+          // Подсвечиваем разрешенные категории
+          section.classList.add("highlight-section");
+        } else if (!isDessert || !dessertAdded) {
+          // Блокируем неразрешенные (кроме десерта, если он добавлен)
+          section.classList.add("locked-section");
+        }
+      } else {
+        // Если комбо не выбрано
+        if (isDessert && !dessertAdded) {
+          // Блокируем десерт, если он не добавлен отдельно
+          section.classList.add("locked-section");
+        }
+      }
+    });
+  }
+
+});
+
+// Отдельный блок для обработки submit формы (как у товарища)
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#order-form");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Получаем значения из скрытых полей
+    const soupInput = document.querySelector("#soupInput");
+    const mainInput = document.querySelector("#mainInput");
+    const saladInput = document.querySelector("#saladInput");
+    const drinkInput = document.querySelector("#drinkInput");
+    const dessertInput = document.querySelector("#dessertInput");
+
+    const soupVal = soupInput?.value || "";
+    const mainVal = mainInput?.value || "";
+    const saladVal = saladInput?.value || "";
+    const drinkVal = drinkInput?.value || "";
+    const dessertVal = dessertInput?.value || "";
+
+    const hasSoup = !!soupVal;
+    const hasMain = !!mainVal;
+    const hasSalad = !!saladVal;
+    const hasDrink = !!drinkVal;
+    const hasDessert = !!dessertVal;
+
+    // Подсчитываем количество выбранных основных блюд (без десерта)
+    const selectedCount = [hasSoup, hasMain, hasSalad, hasDrink].filter(Boolean).length;
+
+    // 1. Ничего не выбрано - когда не добавлено ни одного блюда
+    if (selectedCount === 0 && !hasDessert) {
+      showNotification("Ничего не выбрано. Выберите блюда для заказа");
+      return;
+    }
+
+    // 5. Выберите главное блюдо - когда выбран напиток или десерт (но нет других блюд)
+    if ((hasDrink || hasDessert) && !hasSoup && !hasMain && !hasSalad) {
+      showNotification("Выберите главное блюдо");
+      return;
+    }
+
+    // 3. Выберите главное блюдо/салат/стартер - когда выбран суп, но не выбраны главное блюдо, салат или стартер
+    if (hasSoup && !hasMain && !hasSalad) {
+      showNotification("Выберите главное блюдо/салат/стартер");
+      return;
+    }
+
+    // 4. Выберите суп или главное блюдо - когда выбран салат или стартер, но не выбран суп или главное блюдо
+    if (hasSalad && !hasSoup && !hasMain) {
+      showNotification("Выберите суп или главное блюдо");
+      return;
+    }
+
+    // 2. Выберите напиток - когда выбраны все необходимые блюда, но не выбран напиток
+    // Проверяем валидные комбинации без напитка
+    if (!hasDrink) {
+      // Суп + Главное + Салат (нужен напиток)
+      if (hasSoup && hasMain && hasSalad) {
+        showNotification("Выберите напиток");
+        return;
+      }
+      // Суп + Главное (нужен напиток)
+      if (hasSoup && hasMain && !hasSalad) {
+        showNotification("Выберите напиток");
+        return;
+      }
+      // Главное + Салат (нужен напиток)
+      if (!hasSoup && hasMain && hasSalad) {
+        showNotification("Выберите напиток");
+        return;
+      }
+      // Суп + Салат (нужен напиток)
+      if (hasSoup && !hasMain && hasSalad) {
+        showNotification("Выберите напиток");
+        return;
+      }
+      // Только Главное (нужен напиток)
+      if (!hasSoup && hasMain && !hasSalad) {
+        showNotification("Выберите напиток");
+        return;
+      }
+    }
+
+    // Если все проверки пройдены, проверяем финальное соответствие комбо
+    const combos = [
+      { soup: true, main: true, salad: true, drink: true },
+      { soup: true, main: true, salad: false, drink: true },
+      { soup: false, main: true, salad: true, drink: true },
+      { soup: true, main: false, salad: true, drink: true },
+      { soup: false, main: true, salad: false, drink: true }
+    ];
+
+    const selectedCombo = {
+      soup: hasSoup,
+      main: hasMain,
+      salad: hasSalad,
+      drink: hasDrink
+    };
+
+    let matchedCombo = false;
+    for (const combo of combos) {
+      let matches = true;
+      for (const cat in combo) {
+        if (combo[cat] !== selectedCombo[cat]) {
+          matches = false;
+          break;
+        }
+      }
+      if (matches) {
+        matchedCombo = true;
+        break;
+      }
+    }
+
+    // Если комбо не соответствует ни одному варианту, показываем общее сообщение
+    if (!matchedCombo) {
+      showNotification("Ничего не выбрано. Выберите блюда для заказа");
+      return;
+    }
+
+    // Если всё в порядке, отправляем форму
+    showNotification("Заказ успешно оформлен! ✅");
+    setTimeout(() => {
+      form.submit();
+    }, 1000);
+  });
+
+  function showNotification(message) {
+    const existing = document.querySelector(".notification");
+    if (existing) {
+      existing.remove();
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "notification";
+    wrapper.innerHTML = `
+      <div class="notification-content">
+        <p>${message}</p>
+        <button id="notif-ok">Окей 👌</button>
+      </div>
+    `;
+    document.body.appendChild(wrapper);
+
+    const okBtn = wrapper.querySelector("#notif-ok");
+    okBtn.addEventListener("click", () => {
+      wrapper.remove();
+    });
+  }
 });

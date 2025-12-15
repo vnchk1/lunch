@@ -1,8 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
+let menuRendered = false;
+
+function renderMenu() {
+  // ждём готовности DOM
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderMenu, { once: true });
+    return;
+  }
+
+  // ждём, пока блюда загрузятся из API
+  if (!Array.isArray(dishes) || dishes.length === 0) {
+    return;
+  }
+
+  // исключаем повторную инициализацию
+  if (menuRendered) return;
+  menuRendered = true;
+
   // порядок категорий — можно менять
   const categories = ["soup", "main", "salad", "dessert", "drink"];
   const mainContainer = document.querySelector("main");
   const orderBox = document.querySelector("#order-box");
+  const orderForm = document.querySelector("#order-form");
   const soupInput = document.querySelector("#soupInput");
   const mainInput = document.querySelector("#mainInput");
   const drinkInput = document.querySelector("#drinkInput");
@@ -51,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Сортировка блюд по категориям
   const sortedDishes = {};
   categories.forEach(cat => {
-    sortedDishes[cat] = dishes
+    sortedDishes[cat] = (dishes || [])
       .filter(d => d.category === cat)
       .sort((a, b) => a.name.localeCompare(b.name));
   });
@@ -423,7 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     sections.forEach(section => {
       const sectionCategory = section.dataset.category;
-      const isDessert = sectionCategory === "dessert";
       
       // Убираем все классы подсветки
       section.classList.remove("highlight-section", "locked-section");
@@ -433,21 +450,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (allowedCategories.includes(sectionCategory)) {
           // Подсвечиваем разрешенные категории
           section.classList.add("highlight-section");
-        } else if (!isDessert || !dessertAdded) {
+        } else if (!(sectionCategory === "dessert" && dessertAdded)) {
           // Блокируем неразрешенные (кроме десерта, если он добавлен)
-          section.classList.add("locked-section");
-        }
-      } else {
-        // Если комбо не выбрано
-        if (isDessert && !dessertAdded) {
-          // Блокируем десерт, если он не добавлен отдельно
           section.classList.add("locked-section");
         }
       }
     });
   }
+}
 
-});
+// Рендер запускается после загрузки данных или при наличии готового массива
+document.addEventListener("dishesLoaded", renderMenu);
 
 // Отдельный блок для обработки submit формы (как у товарища)
 document.addEventListener("DOMContentLoaded", () => {

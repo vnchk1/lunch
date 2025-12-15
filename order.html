@@ -17,6 +17,7 @@
     <ul>
       <li><a href="index.html">О нас</a></li>
       <li><a href="order.html" class="active">Собрать ланч</a></li>
+      <li><a href="checkout.html">Оформить заказ</a></li>
       <li><a href="feedback.html">Обратная связь</a></li>
       <li><a href="auth.html">Вход</a></li>
     </ul>
@@ -24,152 +25,109 @@
 </header>
 
 <main>
-  <h2>Соберите свой идеальный ланч</h2>
+  <div class="order-page">
+    <div class="order-content">
+      <h2>Соберите свой идеальный ланч</h2>
 
-  <!-- Блок с доступными комбо -->
-  <section class="combo-section">
-    <h2>Доступные для заказа варианты ланча</h2>
-    <div class="combo-grid">
-      <div class="combo" data-combo='{"soup":true,"main":true,"salad":true,"drink":true}'>
-        <div class="combo-dish">
-          <img src="images/soup.png" alt="Суп">
-          <p>Суп</p>
+      <!-- Блок с доступными комбо -->
+      <section class="combo-section">
+        <h2>Доступные для заказа варианты ланча</h2>
+        <div class="combo-grid">
+          <div class="combo" data-combo='{"soup":true,"main":true,"salad":true,"drink":true}'>
+            <div class="combo-dish">
+              <img src="images/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":true,"main":true,"salad":false,"drink":true}'>
+            <div class="combo-dish">
+              <img src="images/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":false,"main":true,"salad":true,"drink":true}'>
+            <div class="combo-dish">
+              <img src="images/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":true,"main":false,"salad":true,"drink":true}'>
+            <div class="combo-dish">
+              <img src="images/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":false,"main":true,"salad":false,"drink":true}'>
+            <div class="combo-dish">
+              <img src="images/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="images/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo dessert-combo" data-combo='{"dessert":true}'>
+            <div class="combo-dish">
+              <img src="images/dessert.png" alt="Десерт">
+              <p>Десерт</p>
+              <p class="dessert-note">(Можно добавить к любому заказу)</p>
+            </div>
+          </div>
         </div>
-        <div class="combo-dish">
-          <img src="images/main.png" alt="Главное блюдо">
-          <p>Главное блюдо</p>
+        <div class="combo-status">
+          <p>Комбо не выбрано</p>
         </div>
-        <div class="combo-dish">
-          <img src="images/salad.png" alt="Салат">
-          <p>Салат</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/drink.png" alt="Напиток">
-          <p>Напиток</p>
-        </div>
-      </div>
-      <div class="combo" data-combo='{"soup":true,"main":true,"salad":false,"drink":true}'>
-        <div class="combo-dish">
-          <img src="images/soup.png" alt="Суп">
-          <p>Суп</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/main.png" alt="Главное блюдо">
-          <p>Главное блюдо</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/drink.png" alt="Напиток">
-          <p>Напиток</p>
-        </div>
-      </div>
-      <div class="combo" data-combo='{"soup":false,"main":true,"salad":true,"drink":true}'>
-        <div class="combo-dish">
-          <img src="images/main.png" alt="Главное блюдо">
-          <p>Главное блюдо</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/salad.png" alt="Салат">
-          <p>Салат</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/drink.png" alt="Напиток">
-          <p>Напиток</p>
-        </div>
-      </div>
-      <div class="combo" data-combo='{"soup":true,"main":false,"salad":true,"drink":true}'>
-        <div class="combo-dish">
-          <img src="images/soup.png" alt="Суп">
-          <p>Суп</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/salad.png" alt="Салат">
-          <p>Салат</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/drink.png" alt="Напиток">
-          <p>Напиток</p>
-        </div>
-      </div>
-      <div class="combo" data-combo='{"soup":false,"main":true,"salad":false,"drink":true}'>
-        <div class="combo-dish">
-          <img src="images/main.png" alt="Главное блюдо">
-          <p>Главное блюдо</p>
-        </div>
-        <div class="combo-dish">
-          <img src="images/drink.png" alt="Напиток">
-          <p>Напиток</p>
-        </div>
-      </div>
-      <div class="combo dessert-combo" data-combo='{"dessert":true}'>
-        <div class="combo-dish">
-          <img src="images/dessert.png" alt="Десерт">
-          <p>Десерт</p>
-          <p class="dessert-note">(Можно добавить к любому заказу)</p>
-        </div>
-      </div>
-    </div>
-    <div class="combo-status">
-      <p>Комбо не выбрано</p>
-    </div>
-    <button class="cancel-combo-btn" style="display: none;">Отменить комбо</button>
-  </section>
+        <button class="cancel-combo-btn" style="display: none;">Отменить комбо</button>
+      </section>
 
-  <!-- Форма заказа -->
-  <form action="https://httpbin.org/post" method="POST" id="order-form" class="order-form">
-    <div class="form-columns">
-
-      <div class="form-block">
-        <h3>Ваш заказ</h3>
-        <div id="order-box">Ничего не выбрано</div>
-
-        <input type="hidden" id="soupInput" name="soup">
-        <input type="hidden" id="mainInput" name="main">
-        <input type="hidden" id="drinkInput" name="drink">
-        <input type="hidden" id="saladInput" name="salad">
-        <input type="hidden" id="dessertInput" name="dessert">
-
-        <label for="comment">Комментарий к заказу</label>
-        <textarea id="comment" name="comment"></textarea>
-      </div>
-
-      <div class="form-block">
-        <h3>Ваши данные</h3>
-
-        <label for="name">Имя</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="subscribe" id="discount-label">
-          <input type="checkbox" id="subscribe" name="subscribe" checked>
-          Получать акции и скидки
-        </label>
-
-        <label for="phone">Телефон</label>
-        <input type="tel" id="phone" name="phone" required>
-
-        <label for="address">Адрес доставки</label>
-        <input type="text" id="address" name="address" required>
-        <p><em>Доставка осуществляется только по Москве</em></p>
-
-        <fieldset>
-          <legend>Время доставки</legend>
-          <label><input type="radio" name="delivery" value="asap" required> Как можно скорее</label><br>
-          <label><input type="radio" name="delivery" value="later"> К указанному времени</label>
-        </fieldset>
-
-        <label for="time">Укажите время доставки</label>
-        <input type="time" id="time" name="time" min="07:00" max="23:00" step="300">
-      </div>
-
+      <div id="menu-root"></div>
     </div>
 
-    <div class="form-actions">
-      <button type="reset">Сбросить</button>
-      <button type="submit">Отправить</button>
-    </div>
-  </form>
+    <aside class="checkout-panel" id="checkout-panel" hidden>
+      <h3>К оформлению</h3>
+      <div id="order-box">Ничего не выбрано</div>
+      <p class="panel-total">Текущая стоимость: <span id="order-total">0 ₽</span></p>
+      <a id="checkout-link" class="checkout-link disabled" href="checkout.html" aria-disabled="true">Перейти к оформлению</a>
+      <p class="checkout-hint">Выберите блюда согласно одному из комбо, чтобы продолжить</p>
+    </aside>
+  </div>
 </main>
 
 <footer>

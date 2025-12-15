@@ -57,6 +57,10 @@
   border: 2px solid tomato;
 }
 
+.dish.selected-card {
+  border: 2px solid tomato;
+}
+
 .dish:hover button {
   background: tomato;
   color: white;
@@ -184,6 +188,64 @@ button {
   color: #333;
 }
 
+.order-page {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 30px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .order-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout-panel {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkout-link {
+  display: inline-block;
+  text-align: center;
+  background: tomato;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.checkout-link.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  transform: none;
+}
+
+.panel-total {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.checkout-hint {
+  font-size: 14px;
+  color: #555;
+}
+
+.selected-btn {
+  background: tomato;
+  color: #fff;
+}
+
 .cancel-combo-btn {
   margin-top: 10px;
   padding: 8px 16px;
@@ -265,6 +327,26 @@ section.locked-section::after {
   background: #000;
   color: #fff;
   border-color: #000;
+}
+
+.cart-section {
+  margin-bottom: 30px;
+}
+
+.cart-section .menu-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.empty-cart {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.disabled-form {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 /* === Адаптивная сетка === */

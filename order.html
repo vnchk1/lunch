@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshLunch — Собрать ланч</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="order.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+
+<header>
+  <h1><a href="landing.html" style="color: white; text-decoration: none;">FreshLunch</a></h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">О нас</a></li>
+      <li><a href="order.html" class="active">Собрать ланч</a></li>
+      <li><a href="checkout.html">Оформить заказ</a></li>
+      <li><a href="orders.html">Заказы</a></li>
+      <li><a href="feedback.html">Обратная связь</a></li>
+      <li><a href="auth.html">Вход</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="order-page">
+    <div class="order-content">
+      <h2>Соберите свой идеальный ланч</h2>
+
+      <!-- Блок с доступными комбо -->
+      <section class="combo-section">
+        <h2>Доступные для заказа варианты ланча</h2>
+        <div class="combo-grid">
+          <div class="combo" data-combo='{"soup":true,"main":true,"salad":true,"drink":true}'>
+            <div class="combo-dish">
+              <img src="img/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":true,"main":true,"salad":false,"drink":true}'>
+            <div class="combo-dish">
+              <img src="img/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":false,"main":true,"salad":true,"drink":true}'>
+            <div class="combo-dish">
+              <img src="img/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":true,"main":false,"salad":true,"drink":true}'>
+            <div class="combo-dish">
+              <img src="img/soup.png" alt="Суп">
+              <p>Суп</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/salad.png" alt="Салат">
+              <p>Салат</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo" data-combo='{"soup":false,"main":true,"salad":false,"drink":true}'>
+            <div class="combo-dish">
+              <img src="img/main.png" alt="Главное блюдо">
+              <p>Главное блюдо</p>
+            </div>
+            <div class="combo-dish">
+              <img src="img/drink.png" alt="Напиток">
+              <p>Напиток</p>
+            </div>
+          </div>
+          <div class="combo dessert-combo" data-combo='{"dessert":true}'>
+            <div class="combo-dish">
+              <img src="img/dessert.png" alt="Десерт">
+              <p>Десерт</p>
+              <p class="dessert-note">(Можно добавить к любому заказу)</p>
+            </div>
+          </div>
+        </div>
+        <div class="combo-status">
+          <p>Комбо не выбрано</p>
+        </div>
+        <button class="cancel-combo-btn" style="display: none;">Отменить комбо</button>
+      </section>
+
+      <div id="menu-root"></div>
+    </div>
+
+    <aside class="checkout-panel" id="checkout-panel" hidden>
+      <h3>К оформлению</h3>
+      <div id="order-box">Ничего не выбрано</div>
+      <p class="panel-total">Текущая стоимость: <span id="order-total">0 ₽</span></p>
+      <a id="checkout-link" class="checkout-link disabled" href="checkout.html" aria-disabled="true">Перейти к оформлению</a>
+      <p class="checkout-hint">Выберите блюда согласно одному из комбо, чтобы продолжить</p>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <p>📞 <a href="tel:+79197615291">+7 (919) 761-52-91</a></p>
+</footer>
+
+<script src="dishes.js"></script>
+<script src="render.js"></script>
+
+</body>
+</html>

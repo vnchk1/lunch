@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshLunch — Бизнес-ланчи с доставкой</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <style>
+    .hero-section {
+      background: url('img/lunch.jpg') center/cover no-repeat;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 60px 40px;
+      width: 100%;
+    }
+    .hero-section h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .hero-section p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: white;
+    }
+    .hero-section .btn-hero {
+      background: #ff6347;
+      color: white;
+      padding: 15px 40px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    .hero-section .btn-hero:hover {
+      background: #e5533c;
+    }
+    .features-section {
+      padding: 60px 50px;
+      background: #fafafa;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #222;
+    }
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    .cta-section {
+      background: #ff6347;
+      color: white;
+      padding: 60px 50px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      color: white;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .cta-section p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: white;
+    }
+    .cta-section .btn-cta {
+      background: white;
+      color: #ff6347;
+      padding: 15px 40px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      display: inline-block;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cta-section .btn-cta:hover {
+      background: #ffe082;
+      color: #ff6347;
+    }
+    .contact-section {
+      padding: 60px 50px;
+    }
+    .contact-form-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-info {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .contact-info p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .contact-info a {
+      color: #ff6347;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .contact-info a:hover {
+      color: #e5533c;
+    }
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 28px;
+      }
+      .hero-section p {
+        font-size: 16px;
+      }
+      .features-section,
+      .cta-section,
+      .contact-section {
+        padding: 40px 20px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1><a href="landing.html" style="color: white; text-decoration: none;">FreshLunch</a></h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">О нас</a></li>
+      <li><a href="order.html">Собрать ланч</a></li>
+      <li><a href="checkout.html">Оформить заказ</a></li>
+      <li><a href="orders.html">Заказы</a></li>
+      <li><a href="feedback.html">Обратная связь</a></li>
+      <li><a href="auth.html">Вход</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay">
+    <h1>Горячие бизнес-ланчи с доставкой</h1>
+    <p>Мы привезем вкусный обед в любую точку города — быстро, горячо и вовремя.</p>
+    <a href="order.html" class="btn-hero">Собрать ланч</a>
+  </div>
+</section>
+
+<!-- Преимущества -->
+<section class="features-section">
+  <div class="container">
+    <h2 class="text-center" style="text-align: center; margin-bottom: 20px;">Почему выбирают нас</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>🚀 Быстрая доставка</h3>
+        <p>Привозим обед к назначенному времени без опозданий — даже в час пик.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🍱 Упаковка бесплатно</h3>
+        <p>Надежно упаковываем блюда в термоконтейнеры, чтобы всё осталось горячим.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🕐 Работаем целый день</h3>
+        <p>Доставка ланчей с 7:00 до 23:00 без выходных.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA блок -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Готовы к обеду?</h2>
+    <p>Соберите свой идеальный ланч прямо сейчас</p>
+    <a href="order.html" class="btn-cta">Перейти к сборке</a>
+  </div>
+</section>
+
+<!-- Форма обратной связи -->
+<section class="contact-section">
+  <div class="container">
+    <h2 class="text-center" style="text-align: center; margin-bottom: 30px;">Свяжитесь с нами</h2>
+    <div class="contact-form-wrapper">
+      <form action="https://httpbin.org/post" method="POST">
+        <label>
+          Имя
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Сообщение
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit">Отправить</button>
+      </form>
+      <div class="contact-info">
+        <p>📞 <a href="tel:+79197615291">+7 (919) 761-52-91</a></p>
+        <p>📍 Москва, ул. Шарико-подшипниковая, 10</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 FreshLunch — доставка бизнес-ланчей</p>
+  <p>📍 Москва, ул. Шарико-подшипниковая, 10</p>
+  <p>📞 <a href="tel:+79197615291">+7 (919) 761-52-91</a></p>
+</footer>
+
+</body>
+</html>

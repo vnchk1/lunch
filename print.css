@@ -1,0 +1,23 @@
+/* print.css — стили для печати */
+header, nav, button {
+  display: none !important;
+}
+
+body {
+  font-size: 14px;
+  color: black;
+  background: white;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 0;
+}
+
+footer {
+  border-top: 1px solid #000;
+  margin-top: 20px;
+  padding-top: 10px;
+  color: black;
+}
+

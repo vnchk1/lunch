@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshLunch — Обратная связь</title>
+
+  <!-- Шрифт и стили -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+
+<header>
+  <h1><a href="landing.html" style="color: white; text-decoration: none;">FreshLunch</a></h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">О нас</a></li>
+      <li><a href="order.html">Собрать ланч</a></li>
+      <li><a href="checkout.html">Оформить заказ</a></li>
+      <li><a href="orders.html">Заказы</a></li>
+      <li><a href="feedback.html" class="active">Обратная связь</a></li>
+      <li><a href="auth.html">Вход</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>Обратная связь</h2>
+
+  <form action="https://httpbin.org/post" method="POST" enctype="multipart/form-data">
+    <label>
+      ФИО:<br>
+      <input type="text" name="fullname" required>
+    </label>
+
+    <label>
+      Email:<br>
+      <input type="email" name="email" required>
+    </label>
+
+    <p>Откуда узнали о нас?</p>
+
+    <!-- Радиокнопки -->
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="source" value="search" required>
+        Поиск
+      </label>
+      <label>
+        <input type="radio" name="source" value="friends">
+        Друзья
+      </label>
+      <label>
+        <input type="radio" name="source" value="social">
+        Соцсети
+      </label>
+    </div>
+
+    <label>
+      Тип обращения:<br>
+      <select name="type" required>
+        <option value="">Выберите</option>
+        <option value="complaint">Жалоба</option>
+        <option value="suggestion">Предложение</option>
+      </select>
+    </label>
+
+    <label>
+      Сообщение:<br>
+      <textarea name="message" rows="5" required></textarea>
+    </label>
+
+    <label>
+      Файл:<br>
+      <input type="file" name="file">
+    </label>
+
+    <label class="checkbox-line">
+      <input type="checkbox" name="consent" required> Даю согласие на обработку данных
+    </label>
+
+    <button type="submit">Отправить</button>
+  </form>
+</main>
+
+<footer>
+  <p>📞 <a href="tel:+79197615291">+7 (919) 761-52-91</a></p>
+</footer>
+
+</body>
+</html>

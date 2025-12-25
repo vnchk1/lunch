@@ -1,0 +1,412 @@
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+}
+header { padding: 10px 0 20px 50px; }
+.menu { display: flex; list-style: none; padding: 0; }
+.menu li { margin-right: 20px; }
+.menu a { text-decoration: none; color: black; font-weight: 500; }
+.menu a:hover { color: red; }
+main { padding: 20px 50px; }
+img { max-width: 100%; }
+table { border-collapse: collapse; width: 600px; }
+th, td { border: 1px solid black; padding: 10px; text-align: center; }
+footer {
+    background: black; color: white;
+    padding: 20px; text-align: center;
+}
+footer a { color: white; text-decoration: none; }
+.cards { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px; text-align: center; width: 220px;
+}
+.card img { width: 100%; border-radius: 8px; }
+.card button {
+    margin-top: 10px; width: 100%;
+    padding: 8px; border: none; border-radius: 6px;
+    background: black; color: white; cursor: pointer;
+}
+.card button:hover { background: #333; }
+form { max-width: 500px; }
+label { display: block; margin: 5px 0; }
+input, select, textarea {
+    width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+}
+textarea { resize: vertical; }
+button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+.order-form { max-width: 100%; }
+.form-columns { display: flex; gap: 40px; flex-wrap: wrap; }
+.form-block { flex: 1; min-width: 280px; }
+.form-actions { margin-top: 20px; display: flex; gap: 20px; }
+.auth-section {
+    background: url("img/photo-1504674900247-0877df9cc836.avif") no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-section form { 
+    background: rgba(0,0,0,0.5); 
+    display: inline-block; 
+    padding: 20px; 
+    border-radius: 10px; 
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    margin-right: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+}
+
+input[type="radio"] {
+    border-radius: 50%;
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    border-color: black;
+}
+
+input[type="radio"]:checked {
+    background-color: black;
+    border-color: black;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    left: 2px;
+    top: -2px;
+}
+
+input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+.add-btn {
+    display: block;
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+    background: #333;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 220px;
+  min-height: 340px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
+.card p {
+  flex-grow: 1;
+  font-size: 15px;
+  margin: 8px 0;
+}
+
+.card button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card button:hover {
+  background: #d9534f;
+}
+
+.filter-box {
+  margin-bottom: 15px;
+}
+
+.filter-btn {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #d9534f;
+  color: #fff;
+}
+
+.notification {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.notification-content {
+  background: #fff;
+  border: 1px solid #000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 25px 35px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.notification-content p {
+  margin-bottom: 20px;
+}
+
+.notification-content button {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-content button:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.combo-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.combo-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.combo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: row;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.combo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.combo img {
+  width: 45px;
+  height: 45px;
+  transition: transform 0.3s ease;
+}
+
+.combo img:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.dessert-note {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  margin-left: 8px;
+}
+
+.highlight-section {
+  border: 3px solid #ff4444;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fffafa;
+  transition: 0.3s ease;
+}
+
+.combo.active-combo {
+  border: 2px solid red;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.cancel-combo-btn {
+  margin-top: 15px;
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.cancel-combo-btn:hover {
+  background: #b52b27;
+}
+
+.combo-status {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #d9534f;
+  text-align: center;
+}
+
+.locked-section {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(80%);
+  transition: 0.3s;
+}
+
+.highlight-section {
+  border: 3px solid #ff4444;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fffafa;
+  transition: 0.3s ease;
+}
+
+.cancel-combo-btn {
+  margin-top: 15px;
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.cancel-combo-btn:hover {
+  background: #b52b27;
+}
+
+.checkout-panel {
+  position: sticky;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 15px 25px;
+  max-width: 400px;
+  margin-top: 30px;
+  z-index: 100;
+}
+
+.checkout-btn {
+  background: black;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.checkout-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+}

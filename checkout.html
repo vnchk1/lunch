@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshLunch — Оформить заказ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="order.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+
+<header>
+  <h1>FreshLunch</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">О нас</a></li>
+      <li><a href="order.html">Собрать ланч</a></li>
+      <li><a href="checkout.html" class="active">Оформить заказ</a></li>
+      <li><a href="orders.html">Заказы</a></li>
+      <li><a href="feedback.html">Обратная связь</a></li>
+      <li><a href="auth.html">Вход</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>Оформление заказа</h2>
+
+  <section class="cart-section">
+    <h3>Состав заказа</h3>
+    <p id="empty-cart" class="empty-cart" hidden>Ничего не выбрано. Чтобы добавить блюда в заказ, перейдите на страницу <a href="order.html">Собрать ланч</a>.</p>
+    <div id="order-items" class="menu-grid"></div>
+  </section>
+
+  <section class="checkout-section">
+    <h3>Оформление заказа</h3>
+    <form id="order-form" class="order-form" novalidate>
+      <div class="form-columns">
+        <div class="form-block">
+          <h3>Ваш заказ</h3>
+          <div id="summary-list">
+            <p><strong>Суп:</strong> <span data-summary="soup">Не выбран</span></p>
+            <p><strong>Главное блюдо:</strong> <span data-summary="main">Не выбрано</span></p>
+            <p><strong>Салат:</strong> <span data-summary="salad">Не выбран</span></p>
+            <p><strong>Напиток:</strong> <span data-summary="drink">Не выбран</span></p>
+            <p><strong>Десерт:</strong> <span data-summary="dessert">Не выбран</span></p>
+          </div>
+          <p class="panel-total">Итого: <span id="form-total">0 ₽</span></p>
+        </div>
+
+        <div class="form-block">
+          <h3>Ваши данные</h3>
+
+          <label for="full_name">Имя</label>
+          <input type="text" id="full_name" name="full_name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="subscribe" id="discount-label">
+            <input type="checkbox" id="subscribe" name="subscribe">
+            Получать акции и скидки
+          </label>
+
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" required>
+
+          <label for="delivery_address">Адрес доставки</label>
+          <input type="text" id="delivery_address" name="delivery_address" required>
+          <p><em>Доставка осуществляется только по Москве</em></p>
+
+          <fieldset>
+            <legend>Время доставки</legend>
+            <label><input type="radio" name="delivery_type" value="now" required> Как можно скорее</label><br>
+            <label><input type="radio" name="delivery_type" value="by_time"> К указанному времени</label>
+          </fieldset>
+
+          <label for="delivery_time">Укажите время доставки</label>
+          <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
+
+          <label for="comment">Комментарий к заказу</label>
+          <textarea id="comment" name="comment"></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="reset">Сбросить</button>
+        <button type="submit" id="submit-btn">Отправить</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>📞 <a href="tel:+79197615291">+7 (919) 761-52-91</a></p>
+</footer>
+
+<script src="checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+/* === Сетка меню === */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+/* === Фильтры под заголовком категории === */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 18px;
+  flex-wrap: wrap;
+}
+
+/* Исправленные стили: явный контраст текста и рамки */
+.filter-btn {
+  background: #f6f6f6;
+  border: 1px solid #dcdcdc;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  color: #222;              /* тёмный контрастный текст */
+  box-shadow: none;
+}
+
+.filter-btn:hover {
+  background: #efefef;
+  border-color: #cfcfcf;
+}
+
+.filter-btn.active {
+  background: tomato;
+  color: #ffffff;           /* белый текст на активной кнопке */
+  border-color: tomato;
+}
+
+/* === Карточка блюда === */
+.dish {
+  background: #fff;
+  border-radius: 35px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dish:hover {
+  border: 2px solid tomato;
+}
+
+.dish.selected-card {
+  border: 2px solid tomato;
+}
+
+.dish:hover button {
+  background: tomato;
+  color: white;
+}
+
+.dish img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 35px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.weight {
+  color: gray;
+}
+
+button {
+  background: #f1eee9;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* сообщение "по фильтру нет позиций" */
+.empty-note {
+  color: #777;
+  margin-top: 10px;
+}
+
+/* === Блок с комбо === */
+.combo-section {
+  margin-bottom: 40px;
+}
+
+.combo-section h2 {
+  margin-bottom: 20px;
+}
+
+.combo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.combo {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.combo:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.combo.active-combo {
+  border: 2px solid tomato;
+  box-shadow: 0 4px 16px rgba(255, 99, 71, 0.3);
+}
+
+.combo-dish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.combo-dish img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.combo-dish:hover img {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.combo-dish p {
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+}
+
+.dessert-combo {
+  flex-direction: column;
+}
+
+.dessert-note {
+  font-size: 10px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.combo-status {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.combo-status p {
+  margin: 0;
+  color: #333;
+}
+
+.order-page {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 30px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .order-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout-panel {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkout-link {
+  display: inline-block;
+  text-align: center;
+  background: tomato;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.checkout-link.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  transform: none;
+}
+
+.panel-total {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.checkout-hint {
+  font-size: 14px;
+  color: #555;
+}
+
+.selected-btn {
+  background: tomato;
+  color: #fff;
+}
+
+.cancel-combo-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #f6f6f6;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.cancel-combo-btn:hover {
+  background: #efefef;
+}
+
+/* Подсветка секций */
+section.highlight-section {
+  background: rgba(255, 99, 71, 0.1);
+  border: 2px solid rgba(255, 99, 71, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+section.locked-section {
+  opacity: 0.5;
+  pointer-events: none;
+  position: relative;
+}
+
+section.locked-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* === Уведомления === */
+.notification {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.notification-content {
+  background: #fff;
+  border: 1px solid #000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 25px 35px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.notification-content p {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.notification-content button {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-content button:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.cart-section {
+  margin-bottom: 30px;
+}
+
+.cart-section .menu-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.empty-cart {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.disabled-form {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* === Адаптивная сетка === */
+@media (max-width: 1000px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .combo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .combo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Стили формы === */
+.order-form {
+  margin-top: 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.form-block {
+  flex: 1;
+  min-width: 300px;
+}
+
+.form-block h3 {
+  margin-bottom: 15px;
+}
+
+.form-block label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.form-block input,
+.form-block textarea,
+.form-block select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* === Радиокнопки и блок времени === */
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-top: 15px;
+}
+
+fieldset legend {
+  padding: 0 5px;
+  font-weight: 600;
+}
+
+/* Радиокнопки строго напротив текста */
+fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+fieldset input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: tomato;
+}
+
+/* Поле выбора времени */
+label[for="time"] {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+input[type="time"] {
+  width: auto;
+  display: block;
+  margin-top: 5px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+/* === Кнопки отправки === */
+.form-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-actions button {
+  background: tomato;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.form-actions button:hover {
+  background: #e3421c;
+}
+
+/* === Адаптивность формы === */
+@media (max-width: 800px) {
+  .form-columns {
+    flex-direction: column;
+  }
+
+  input[type="time"] {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* === Чекбокс "Получать скидки и акции" === */
+.form-block input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: tomato;
+  cursor: pointer;
+}
+
+/* Выровнять чекбокс и надпись в одну линию */
+label[for="discounts"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
